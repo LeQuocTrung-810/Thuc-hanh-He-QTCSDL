@@ -19,8 +19,47 @@ cơ sở dữ liệu Thuchanh
 
 ### Bài 3: Thực hành về bảng ảo (View)  
 1. Nêu các bước tạo View bằng công cụ.
-2. Sử dụng lệnh T-SQL để tạo ra View có tên là v_sinhvien để hiển thị toàn bộ các sinh viên
-trong bảng tb_sinhvien gồm các cột dữ liệu: MaSV, HoTen, Ngaysinh, GioiTinh, MaLop.
-3. Sử dụng lệnh T-SQL để hiển thị sinh viên có MaSV là 01 trong v_sinhvien
-4. Sử dụng lệnh T-SQL thêm cột HoKhau vào v_Sinhvien
+- Mở SSMS và kết nối đến CSDL.
+- Mở phần DataBase => tb_SinhVien => view.
+- Nhấp chuột phải vào views => New view.
+- Chọn bảng cần tạo view => nhấn Add => Close.
+- Chọn các cột cần hiển thị.
+- Nhấn nút Save, đặt tên là v_SinhVien.
+2. Sử dụng lệnh T-SQL để tạo ra View có tên là v_sinhvien để hiển thị toàn bộ các sinh viên trong bảng tb_sinhvien gồm các cột dữ liệu: MaSV, HoTen, Ngaysinh, GioiTinh, MaLop.
+```
+CREATE VIEW v_sinhvien AS
+SELECT MaSV, HoTen, NgaySinh, GioiTinh, MaLop
+FROM tb_Sinhvien;
+```
+3. Sử dụng lệnh T-SQL để hiển thị sinh viên có MaSV là 01 trong v_sinhvien  ![image](https://github.com/user-attachments/assets/1636abcd-0a1b-4388-9b26-a2d42756a6bb)  
+
+4. Sử dụng lệnh T-SQL thêm cột HoKhau vào v_Sinhvien  ![image](https://github.com/user-attachments/assets/a81a6734-f717-4741-a447-6abd79b03579)  
+
 5. Sử dụng lệnh T-SQL để xóa v_sinhven
+```
+DROP VIEW v_sinhvien;
+```
+### Bài 4: Thực hành về thủ tục lưu trữ (STORED PROCEDURE)
+1. Nêu các bước tạo thủ tục bằng công cụ.
+- Mở SSMS
+2. Sử dụng lệnh T-SQL tạo ra thủ tục có tên là st_sinhvien từ bảng dữ liệu tb_sinhvien có tham số đầu vào Maso để hiển thị sinh viên có MaSV bằng Maso được truyền vào khi thực thi thủ tục.
+```
+CREATE PROCEDURE st_sinhvien
+    @Maso NVARCHAR(10)
+AS
+BEGIN
+    SELECT *
+    FROM tb_Sinhvien
+    WHERE MaSV = @Maso;
+END;
+```  
+![image](https://github.com/user-attachments/assets/8c0bb87e-af18-4742-bcaf-a9d9d552e606)  
+
+3. Sử dụng lệnh T-SQL để gọi và thực thi thủ tục st_sinhvien để hiển thị thông tin có MaSV là 01.
+![image](https://github.com/user-attachments/assets/5177287e-026e-40d1-b2cd-e7d399879d1e)  
+
+4. Sử dụng lệnh T-SQL để xóa thủ tục st_sinhvien.
+```
+Drop Procedure st_sinhvien
+```
+![image](https://github.com/user-attachments/assets/797cc7a1-fcce-4bb8-90cd-dd433d1da8a5)  
